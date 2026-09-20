@@ -1,0 +1,124 @@
+import java.util.*;
+
+public class Amazon {
+
+    static Scanner sc = new Scanner(System.in);
+
+    static String[] products = {"Mobile", "Laptop", "Headphones"};
+    static int[] prices = {15000, 50000, 2000};
+
+    static ArrayList<String> cart = new ArrayList<>();
+
+    public static void main(String[] args) {
+
+        // 1. LOGIN
+        System.out.print("Enter Username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+
+        System.out.println("Login Successful!");
+        System.out.println("Welcome " + username);
+
+        int choice;
+
+        do {
+            System.out.println("\n===== AMAZON MENU =====");
+            System.out.println("1. View Products");
+            System.out.println("2. Search Product");
+            System.out.println("3. Add to Cart");
+            System.out.println("4. View Cart");
+            System.out.println("5. Place Order");
+            System.out.println("6. Exit");
+
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    // 2. PRODUCT DETAILS
+                    System.out.println("\nProducts:");
+                    for (int i = 0; i < products.length; i++) {
+                        System.out.println((i + 1) + ". "
+                                + products[i] + " - ₹" + prices[i]);
+                    }
+                    break;
+
+                case 2:
+                    // 3. SEARCH PRODUCT
+                    sc.nextLine();
+                    System.out.print("Enter product name: ");
+                    String search = sc.nextLine();
+
+                    boolean found = false;
+
+                    for (int i = 0; i < products.length; i++) {
+                        if (products[i].equalsIgnoreCase(search)) {
+                            System.out.println("Product Found!");
+                            System.out.println(products[i]
+                                    + " - ₹" + prices[i]);
+                            found = true;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("Product Not Found!");
+                    }
+                    break;
+
+                case 3:
+                    // 4. ADD TO CART
+                    System.out.println("\nSelect Product:");
+
+                    for (int i = 0; i < products.length; i++) {
+                        System.out.println((i + 1) + ". "
+                                + products[i] + " - ₹" + prices[i]);
+                    }
+
+                    System.out.print("Enter product number: ");
+                    int productNo = sc.nextInt();
+
+                    if (productNo >= 1 && productNo <= products.length) {
+                        cart.add(products[productNo - 1]);
+                        System.out.println("Product added to cart!");
+                    } else {
+                        System.out.println("Invalid product!");
+                    }
+                    break;
+
+                case 4:
+                    // VIEW CART
+                    System.out.println("\nYour Cart:");
+
+                    if (cart.isEmpty()) {
+                        System.out.println("Cart is empty.");
+                    } else {
+                        for (String item : cart) {
+                            System.out.println("- " + item);
+                        }
+                    }
+                    break;
+
+                case 5:
+                    // 5. PLACE ORDER
+                    if (cart.isEmpty()) {
+                        System.out.println("Cart is empty!");
+                    } else {
+                        System.out.println("Order placed successfully!");
+                        cart.clear();
+                    }
+                    break;
+
+                case 6:
+                    System.out.println("Thank you for using Amazon!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 6);
+    }
+}
