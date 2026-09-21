@@ -5,7 +5,7 @@ public class Login {
 
         Scanner sc = new Scanner(System.in);
 
-        String correctUsername = "Sridevi";
+        String correctUsername = "Sajinthini";
         String correctPassword = "1234";
 
         System.out.print("Enter Username: ");
